@@ -14,26 +14,26 @@
  * }
  */
 class Solution {
-    Map<String, Integer> subTreeMap = new HashMap<>();
-    List<TreeNode> res = new LinkedList<>();
+    List<TreeNode> result = new LinkedList<>();
+    Map<String,Integer> subTreeMap = new HashMap<>(); // to store flattened strings/subtrees
 
-    public String preOrder(TreeNode node) {
-        if (node == null) return "null";
-
-        // serialize subtree
-        String s = node.val + "," + preOrder(node.left) + "," + preOrder(node.right);
-
-        int count = subTreeMap.getOrDefault(s, 0);
-        if (count == 1) { // add only once, even if a subtree is prsent 3 times , add it only once
-            res.add(node);
+    public String preOrder(TreeNode node){
+        if(node==null){
+            return "null";
         }
-        subTreeMap.put(s, count + 1);
+
+        String s = node.val+","+preOrder(node.left)+","+preOrder(node.right);
+
+        int count = subTreeMap.getOrDefault(s,0); // count of subtree or 0 if not exists
+        if(count==1){
+            result.add(node);
+        }
+        subTreeMap.put(s,count+1);
 
         return s;
     }
-
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
         preOrder(root);
-        return res;
+        return result;
     }
 }
