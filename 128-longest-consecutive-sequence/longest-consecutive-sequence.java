@@ -1,4 +1,13 @@
 class Solution {
+  /*  Time comp:
+
+Building HashSet → O(n)
+
+Outer loop → O(n)
+
+Inner while loop → O(n) in total across all runs (not per element)
+
+So total = O(n + n + n) = O(n) */
     public int longestConsecutive(int[] nums) {
         if(nums.length==0) return 0;
         Set<Integer> numSet = new HashSet<>();
